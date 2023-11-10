@@ -47,8 +47,9 @@ def upload_to_openai(filepath):
 
 # Create a sidebar for API key configuration and additional features
 st.sidebar.header("Configuration")
-api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
-if api_key:
+if api_key := st.sidebar.text_input(
+    "Enter your OpenAI API key", type="password"
+):
     openai.api_key = api_key
 
 # Additional features in the sidebar for web scraping and file uploading
@@ -122,9 +123,7 @@ def process_message_with_citations(message):
             cited_file = {'filename': 'downloaded_document.pdf'}  # This should be replaced with actual file retrieval
             citations.append(f'[{index + 1}] Click [here](#) to download {cited_file["filename"]}')  # The download link should be replaced with the actual download path
 
-    # Add footnotes to the end of the message content
-    full_response = message_content.value + '\n\n' + '\n'.join(citations)
-    return full_response
+    return message_content.value + '\n\n' + '\n'.join(citations)
 
 
 
